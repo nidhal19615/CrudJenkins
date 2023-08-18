@@ -1,22 +1,30 @@
-pipeline { 
-  node {
-  stage("Clone the project") {
-    git branch: 'main', url: 'git@github.com:nidhal19615/CrudJenkins.git', credentialsId: 'ssh-master'
-  }
+pipeline {
+    agent any
 
-  stage("Compilation") {
-    sh "./mvnw clean install -DskipTests"
-  }
+    stages {
+        stage("Cloner le projet") {
+            steps {
+                git branch: 'main', url: 'git@github.com/nidhal19615/CrudJenkins.git', credentialsId: 'ssh-master'
+            }
+        }
 
-  stage("Tests and Deployment") {
-    stage("Runing unit tests") {
-      sh "./mvnw test -Punit"
+        stage("Compilation") {
+            steps {
+                sh "./mvnw clean install -DskipTests"
+            }
+        }
+
+        stage("Tests et Déploiement") {
+            stage("Exécution des tests unitaires") {
+                steps {
+                    sh "./mvnw test -Punit"
+                }
+            }
+            stage("Déploiement") {
+                steps {
+                    sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
+                }
+            }
+        }
     }
-    stage("Deployment") {
-      sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
-    }
-  }
-}
-
-
 }
