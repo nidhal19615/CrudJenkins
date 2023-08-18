@@ -1,3 +1,4 @@
+pipeline {
 node {
   stage("Clone the project") {
     git branch: 'main', url: 'git@github.com:nidhal19615/CrudJenkins.git', credentialsId: '1'
@@ -16,4 +17,4 @@ node {
     }
   }
 }
-
+}
