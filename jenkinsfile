@@ -1,5 +1,6 @@
   pipeline { 
-  node {
+    agent any 
+     stages{
   stage("Clone the project") {
     git branch: 'main', url: 'git@github.com:nidhal19615/CrudJenkins.git', credentialsId: 'ssh-master'
   }
@@ -16,5 +17,6 @@
       sh 'nohup ./mvnw spring-boot:run -Dserver.port=8001 &'
     }
   }
-}
+  }
+
 }
