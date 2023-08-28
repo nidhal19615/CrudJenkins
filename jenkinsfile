@@ -1,6 +1,7 @@
 pipeline {
+  agent any
     stages {
-   stage("Clone the project") {
+        stage("Clone the project") {
             steps {
                 script {
                     // Cloner le projet depuis le référentiel Git en utilisant les informations fournies
@@ -8,7 +9,8 @@ pipeline {
                 }
             }
         }
- 
-}
-    
-}
+        
+        // Vous pouvez ajouter d'autres étapes ici
+    }
+  
+            }
