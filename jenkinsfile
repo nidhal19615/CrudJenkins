@@ -1,16 +1,12 @@
 pipeline {
-  agent any
-    stages {
-        stage("Clone the project") {
+  stage("Clone Git Repository") {
             steps {
-                script {
-                    // Cloner le projet depuis le référentiel Git en utilisant les informations fournies
-                    git branch: 'main', url: 'git@github.com:nidhal19615/CrudJenkins.git', credentialsId: 'ssh-master'
-                }
+                git(
+                    url: "git@github.com:nidhal19615/CrudJenkins.git",
+                    branch: "main",
+                    changelog: true,
+                    poll: true
+                )
             }
-        }
-        
-        // Vous pouvez ajouter d'autres étapes ici
-    }
   
             }
