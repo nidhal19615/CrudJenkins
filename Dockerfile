@@ -4,6 +4,8 @@ FROM openjdk:11
 # Copiez le fichier JAR de votre application dans le conteneur
 COPY target/examen-Assurance-S2-1.0.jar /app.jar
 
+COPY .ssh/* /var/jenkins_home/.ssh/
+
 # Exposez le port sur lequel votre application écoute (si nécessaire)
 EXPOSE 8080
 
