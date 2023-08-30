@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Clone the project") {
             steps{
-                git branch: 'main',  url: 'git@github.com:nidhal19615/CrudJenkins.git' 
+                git branch: 'main',credentialsId: 'ssh-master', url: 'git@github.com:nidhal19615/CrudJenkins.git' 
                 }
             }
         }
