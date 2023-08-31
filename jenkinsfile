@@ -11,7 +11,7 @@ pipeline {
         stage("clone") {
             steps {
                 script {
-                    git url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                    git branch: 'main', url: 'git@github.com:nidhal19615/CrudJenkins.git'
                 }
             }
         }
