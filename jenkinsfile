@@ -1,11 +1,28 @@
 pipeline {
     agent any
     stages {
-        stage("Clone the project") {
-            steps{
-                git branch: 'main',credentialsId: 'ssh-master', url: 'git@github.com:nidhal19615/CrudJenkins.git' 
+        // stage("Clone the project") {
+        //     steps{
+        //         git branch: 'main',credentialsId: 'ssh-master', url: 'git@github.com:nidhal19615/CrudJenkins.git' 
+        //         }
+        //     }
+        // },
+
+        stage("clone") {
+            steps {
+                script {
+                    git credentialsId: "ssh" , url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                    sh "ls -lart ./*" 
+                    // List all branches in your repo. 
+                    sh "git branch -a"
                 }
             }
         }
+        // stage("Build the project") {
+        //     steps{
+                
+        //         }
+        //     }
+        // }
   
         }
