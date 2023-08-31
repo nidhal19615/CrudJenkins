@@ -11,10 +11,7 @@ pipeline {
         stage("clone") {
             steps {
                 script {
-                    git credentialsId: "ssh" , url: 'git@github.com:nidhal19615/CrudJenkins.git'
-                    sh "ls -lart ./*" 
-                    // List all branches in your repo. 
-                    sh "git branch -a"
+                    git url: 'git@github.com:nidhal19615/CrudJenkins.git'
                 }
             }
         }
