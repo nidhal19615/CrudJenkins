@@ -15,6 +15,27 @@ pipeline {
                 }
             }
         }
+        stage("build") {
+            steps {
+                script {
+                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                }
+            }
+        }
+        stage("stop") {
+            steps {
+                script {
+                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                }
+            }
+        }
+        stage("run") {
+            steps {
+                script {
+                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                }
+            }
+        }
         // stage("Build the project") {
         //     steps{
                 
