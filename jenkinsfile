@@ -1,13 +1,7 @@
 pipeline {
     agent any
     stages {
-        // stage("Clone the project") {
-        //     steps{
-        //         git branch: 'main',credentialsId: 'ssh-master', url: 'git@github.com:nidhal19615/CrudJenkins.git' 
-        //         }
-        //     }
-        // },
-
+        
         stage("clone") {
             steps {
                 script {
@@ -15,33 +9,12 @@ pipeline {
                 }
             }
         }
-        stage("build") {
-            steps {
-                script {
-                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
-                }
-            }
+      stage('Docker Push') {
+    	agent any
+      steps {
+      	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: '213JMT6518', usernameVariable: 'nidhal2')]) {
+        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push shanem/spring-petclinic:latest'
         }
-        stage("stop") {
-            steps {
-                script {
-                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
-                }
-            }
-        }
-        stage("run") {
-            steps {
-                script {
-                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
-                }
-            }
-        }
-        // stage("Build the project") {
-        //     steps{
-                
-        //         }
-        //     }
-        // }
-  
-        }
+      }
     }
