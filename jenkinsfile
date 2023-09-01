@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_id', passwordVariable: '213JMT6518', usernameVariable: 'nidhal2')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_id')]) {
                     script {
                         def dockerHubUser = credentials('dockerhub_id').username
                         def dockerHubPassword = credentials('dockerhub_id').password
