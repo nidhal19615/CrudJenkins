@@ -9,18 +9,17 @@ pipeline {
             }
         }
       
-        stage('Docker Push') {
+        
+
+
+
+        stage('Build and Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_id')]) {
-                    script {
-                        def dockerHubUser = credentials('dockerhub_id').username
-                        def dockerHubPassword = credentials('dockerhub_id').password
-                        sh 'docker buils -t nidhal2/dev-image .'
-                        sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-                        sh 'docker push shanem/spring-petclinic:latest'
-                    }
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    sh 'docker build -t nidhal2/dev-image .'
+                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'            
+                    sh 'docker push nidhal2/dev-image'
                 }
             }
-        }
     }
 }
