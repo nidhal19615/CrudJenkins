@@ -1,24 +1,24 @@
 pipeline {
     agent any
     stages {
-        
-        stage("clone") {
+        stage("Clone") {
             steps {
                 script {
-                    git branch: 'main',credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
+                    git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
                 }
             }
         }
-     stage('Docker Push') {
-    	agent any
-      steps {
-      	withCredentials([usernamePassword(credentialsId: 'dockerhub_id', passwordVariable: '213JMT6518', usernameVariable: 'nidhal2')]) {
-        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push shanem/spring-petclinic:latest'
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_id', passwordVariable: '213JMT6518', usernameVariable: 'nidhal2')]) {
+                    script {
+                        def dockerHubUser = credentials('dockerhub_id').username
+                        def dockerHubPassword = credentials('dockerhub_id').password
+                        sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+                        sh 'docker push shanem/spring-petclinic:latest'
+                    }
+                }
+            }
         }
-      } 
-
-     
-    }
     }
 }
