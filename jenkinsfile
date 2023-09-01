@@ -9,5 +9,17 @@ pipeline {
             }
         }
       
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_id')]) {
+                    script {
+                        def dockerHubUser = credentials('dockerhub_id').username
+                        def dockerHubPassword = credentials('dockerhub_id').password
+                        sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+                        sh 'docker push shanem/spring-petclinic:latest'
+                    }
+                }
+            }
+        }
     }
 }
