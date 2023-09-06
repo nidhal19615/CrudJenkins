@@ -1,0 +1,21 @@
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:11-jre-slim
+
+# Set environment variables (optional)
+ENV APP_NAME=my-spring-boot-app
+ENV APP_PORT=8080
+
+# Create a directory for your application
+RUN mkdir /app
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the Spring Boot application JAR file into the container
+COPY target/examen-Assurance-S2-1.0.jar /app/app.jar
+
+# Expose the port your application will run on (usually 8080 for Spring Boot)
+EXPOSE $APP_PORT
+
+# Define the command to run your Spring Boot application
+CMD ["java", "-jar", "app.jar"]
