@@ -5,12 +5,12 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN ./mvnw clean install
+RUN ./mvnw install
 
 RUN ./mvnw clean package
 
 # Copiez le fichier JAR de votre application dans le conteneur
-COPY target/examen-Assurance-S2-1.0.jar usr/src/app/app.jar
+COPY target/examen*.jar /app.jar
 
 COPY .ssh/* /var/jenkins_home/.ssh/
 
@@ -18,4 +18,4 @@ COPY .ssh/* /var/jenkins_home/.ssh/
 EXPOSE 8080
 
 # Commande pour démarrer l'application lorsque le conteneur démarre
-CMD ["java", "-jar", "app/app.jar"]
+CMD ["java", "-jar", "/app.jar"]
