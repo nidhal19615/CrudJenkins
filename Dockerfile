@@ -10,7 +10,7 @@ RUN ./mvnw install
 RUN ./mvnw clean package
 
 # Copiez le fichier JAR de votre application dans le conteneur
-COPY target/examen*.jar /app.jar
+COPY /var/lib/docker/tmp/buildkit-mount123631034/target/examen*.jar /app.jar
 
 COPY .ssh/* /var/jenkins_home/.ssh/
 
