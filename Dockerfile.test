@@ -11,6 +11,7 @@ RUN mkdir /app
 # Set the working directory
 WORKDIR /app
 
+RUN mvn clean package
 # Copy the Spring Boot application JAR file into the container
 COPY target/examen-Assurance-S2-1.0.jar /app/app.jar
 
