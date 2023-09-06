@@ -20,7 +20,7 @@ pipeline {
                 }
             }
     }
-      stage("Build and Push Docker Image") {
+      stage("deploy") {
             steps {
                   sh 'docker stack deploy -c Docker-compose.yml spring-boot-app'
                   }
