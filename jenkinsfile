@@ -20,8 +20,12 @@ pipeline {
                 }
             }
     }
-     
+      stage("Deploy") {
+            steps {
+            
+                    sh 'docker stack deploy jenkins -c Docker-compose.yml spring-app'
     }
+            }
 
     
 
