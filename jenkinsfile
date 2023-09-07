@@ -20,15 +20,7 @@ pipeline {
                 }
             }
     }
-      stage("Deploy") {
-            steps {
-            
-                    sh 'docker stack deploy -c spring_stack.yml spring-service'
-
-    }
-            }
-
-    
+  
 
 }
 }
