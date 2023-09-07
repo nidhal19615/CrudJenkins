@@ -1,33 +1,32 @@
 pipeline {
     agent any
     stages {
-        stage("Clone") {
+        stage('Clone') {
             steps {
                 script {
                     git branch: 'main', credentialsId: 'ssh', url: 'git@github.com:nidhal19615/CrudJenkins.git'
                 }
             }
         }
-      
-      
-
-      stage("Build and Push Docker Image") {
+        
+        stage('Build and Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_id', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                    sh 'docker build -t nidhal2/dev-image .'
-                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'            
-                    sh 'docker push nidhal2/dev-image'
+                    script {
+                        sh 'docker build -t nidhal2/dev-image .'
+                        sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                        sh 'docker push nidhal2/dev-image'
+                    }
                 }
             }
-    }
+        }
 
-     stage("Deploy") {
+        stage('Deploy') {
             steps {
-                sh 'docker stack deploy -c spring_stack.yml spring-service'
-                
-                                  }
+                script {
+                    sh 'docker stack deploy -c spring_stack.yml spring-service'
+                }
             }
-  
-
-}
+        }
+    }
 }
