@@ -21,16 +21,6 @@ pipeline {
             }
         }
 
-    stage('Deploy') {
-    steps {
-        script {
-            def dockerStackConfig = 'spring_stack.yml'
-            def serviceName = 'spring-service'
-            sh "docker stack deploy -c ${dockerStackConfig} ${serviceName}"
-        }
-    }
-}
-
 
     }
 }
